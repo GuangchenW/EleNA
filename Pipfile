@@ -11,6 +11,7 @@ numpy = "*"
 networkx = "*"
 tqdm = "*"
 scikit-learn = "*"
+geojson = "*"
 
 [dev-packages]
 
