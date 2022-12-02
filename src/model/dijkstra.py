@@ -1,7 +1,7 @@
 import osmnx as ox
 import networkx as nx
 
-from strategy import Strategy
+from model.strategy import Strategy
 
 class Dijkstra(Strategy):
 	# TODO: Implement dijkstra's from scratch

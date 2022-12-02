@@ -1,5 +1,5 @@
 import osmnx as ox
-from dijkstra import Dijkstra
+from model.dijkstra import Dijkstra
 from geojson import Feature, FeatureCollection, LineString
 
 class Pathfinder:

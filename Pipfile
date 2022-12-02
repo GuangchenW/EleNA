@@ -12,6 +12,7 @@ networkx = "*"
 tqdm = "*"
 scikit-learn = "*"
 geojson = "*"
+folium = "*"
 
 [dev-packages]
 
