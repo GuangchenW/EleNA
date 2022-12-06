@@ -1,7 +1,7 @@
 import osmnx as ox
 import networkx as nx
 
-from model.strategy import Strategy
+from .strategy import Strategy
 
 class Dijkstra(Strategy):
 	# TODO: Implement dijkstra's from scratch
@@ -10,5 +10,6 @@ class Dijkstra(Strategy):
 		destination_node = ox.distance.nearest_nodes(G, dest[1], dest[0])
 		route = nx.shortest_path(G, source_node, destination_node)
 		#fig, ax = ox.plot_graph_route(G, route, node_size=1, figsize=(40,40))
-		return list(map(lambda n: (G._node[n]['x'], G._node[n]['y']), route))
+		#return list(map(lambda n: (G._node[n]['x'], G._node[n]['y']), route))
+		return route
 		
