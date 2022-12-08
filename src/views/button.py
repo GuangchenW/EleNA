@@ -5,18 +5,19 @@ class user_input(flx.Widget):
     def init(self):
         super().init()
 
-        ##three field
+        #three field
         self.startLoc = ''
         self.endLoc = ''
         self.EGain = 0
 
+        #user interface box
         with flx.VBox():
             with flx.HBox():
                 self.start_location = flx.LineEdit(placeholder_text = 'departure..')
                 self.end_location = flx.LineEdit(placeholder_text = 'arrival..')
             with flx.VBox():
-                self.choice1 = flx.RadioButton(text = 'min Elevation Gain (EGain = 1)')
-                self.choice2 = flx.RadioButton(text = 'max Elevation Gain (EGain = 2)')
+                self.choice1 = flx.RadioButton(text = 'min Elevation Gain')
+                self.choice2 = flx.RadioButton(text = 'max Elevation Gain')
                 #self.infoLabel = flx.Label(text = '...')
             with flx.HBox():
                 self.resetting = flx.Button(text = 'Reset')
@@ -42,7 +43,7 @@ class user_input(flx.Widget):
             self.EGain = 2
         else:
             self.EGain = 0
-        self.infoLabel.set_text('Depart from ' + self.startLoc + ' and arrive at ' + self.endLoc +', with EGain value ' + self.EGain + ' .')
+        self.infoLabel.set_text('Depart from ' + self.startLoc + ' and arrive at ' + self.endLoc + ' .')
     
     def get_start(self):
         return self.startLoc
