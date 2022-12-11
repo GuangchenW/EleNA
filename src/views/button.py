@@ -4,6 +4,7 @@ from flexx import flx
 from model.pathfinder import Pathfinder
 from .mapView import MapView
 
+
 class user_input(flx.Widget):
     
     def init(self):
@@ -83,8 +84,3 @@ class user_input(flx.Widget):
         return the choice of elevation gain.
         """
         return self.EGain
-
-
-if __name__ == '__main__':
-    m = flx.launch(user_input)
-    flx.run()

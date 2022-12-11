@@ -1,5 +1,9 @@
-from views.mapView import mapView
+from flexx import flx
+import os
+import sys
 
-mv = mapView()
-mv.insert_start_image()
-mv.render_path()
+from views.button import user_input
+
+if __name__ == '__main__':
+	m = flx.launch(user_input)
+	flx.run()
