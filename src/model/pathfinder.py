@@ -8,8 +8,20 @@ class Pathfinder:
 		self.source = ""
 		self.destination = ""
 	
-	# Returns: json string containing list of coordinates (long, lat)
 	def find_path(self, src, dest, path_type='drive', max_elevation_gain=False):
+		"""
+		Find a path given the start and end point and the appropriate parameters.
+		
+		Parameters:
+		src (str): The starting address
+		dest (str): The destination address
+		path_type (str): The type of transportation
+		max_elevation_gain (boolean): Whether the path should minimize or maximize elevation gain
+		
+		Returns:
+		string: json string containing list of coordinates (long, lat) as feature collection.
+		"""
+		
 		# TODO: use geopandas to to geoencoding
 		G = ox.graph_from_address(src, dist=500, network_type=path_type, return_coords=True, simplify=True)
 		H = ox.geocoder.geocode(dest)
@@ -24,8 +36,19 @@ class Pathfinder:
 		features.append(Feature(geometry = LineString(path_coords)))
 		return ('%s' % FeatureCollection(features))
 	
-	# Construct a smooth path based on a list of node ids
+	# Reference: https://towardsdatascience.com/find-and-plot-your-optimal-path-using-plotly-and-networkx-in-python-17e75387b873
 	def construct_path(self, G, route):
+		"""
+		Construct a smooth path based on a list of node ids.
+		
+		Parameters:
+		G (Multigraph): The graph of the area
+		route (int[]): The list of node ids representing the route
+		
+		Returns:
+		(logitude, latitude)[]: A list of coordinates representing the path.
+		"""
+		
 		edge_nodes = list(zip(route[:-1], route[1:]))
 		lines = []
 		for u, v in edge_nodes:
@@ -49,19 +72,31 @@ class Pathfinder:
 				lines.append((x2, y2))
 		return lines
 	
-	# Returns: tuple containing coordinate (long, lat)
 	def get_source(self):
+		"""
+		Returns:
+		(long, lat): The coordinate tof the starting point of the last path found.
+		"""
 		return self.source
 		
-	# Returns: tuple containing coordinate (long, lat)
 	def get_destination(self):
+		"""
+		Returns:
+		(long, lat): The coordinate tof the destination point of the last path found.
+		"""
 		return self.destination
 		
 	def set_strategy(self, strategy):
+		"""
+		Set the pathfinding strategy for this pathfinder.
+		
+		Parameters:
+		strategy (:Strategy): The pathfinding strategy to be used.
+		"""
 		self.strategy = strategy
 		
-p = Pathfinder()
-p.find_path('Whimbrel Place, Woronora Heights, NSW','Pelican Place, Woronora Heights, NSW')
+#p = Pathfinder()
+#p.find_path('Whimbrel Place, Woronora Heights, NSW','Pelican Place, Woronora Heights, NSW')
 #print(p.get_source())
 #for n in p.find_path('Whimbrel Place, Woronora Heights, NSW','Pelican Place, Woronora Heights, NSW'):
 #	print(n)
