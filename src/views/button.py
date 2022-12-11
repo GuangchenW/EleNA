@@ -5,7 +5,7 @@ from model.pathfinder import Pathfinder
 from .mapView import MapView
 
 
-class user_input(flx.Widget):
+class user_input(flx.PyWidget):
     
     def init(self):
         super().init()
