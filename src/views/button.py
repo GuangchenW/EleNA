@@ -1,4 +1,8 @@
+from importlib.resources import path
+from pathlib import Path
 from flexx import flx
+from model.pathfinder import Pathfinder
+from .mapView import MapView
 
 class user_input(flx.Widget):
     
@@ -8,7 +12,10 @@ class user_input(flx.Widget):
         #three field
         self.startLoc = ''
         self.endLoc = ''
-        self.EGain = 0
+        self.EGain = False
+        self.solution = ''
+        self.pathfinder = Pathfinder()
+        self.map_view = MapView()
 
         #user interface box
         with flx.VBox():
@@ -38,12 +45,15 @@ class user_input(flx.Widget):
         self.startLoc = self.start_location.text
         self.endLoc = self.end_location.text
         if(self.choice1.checked):
-            self.EGain = 1
+            self.EGain = True
         elif(self.choice2.checked):
-            self.EGain = 2
+            self.EGain = False
         else:
-            self.EGain = 0
+            self.EGain = False
         self.infoLabel.set_text('Depart from ' + self.startLoc + ' and arrive at ' + self.endLoc + ' .')
+        self.solution = self.pathfinder.find_path(self.startLoc, self.endLoc)
+        self.map_view.render_path(self.pathfinder.get_source(), self.pathfinder.get_destination(), self.solution)
+
     
     def get_start(self):
         return self.startLoc

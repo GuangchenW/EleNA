@@ -1,20 +1,26 @@
+import webbrowser
 import folium
-from folium import IFrame
-import os
-import base64
-from model.pathfinder import Pathfinder
 
-class mapView:
+class MapView:
     def __init__(self):
-        path = Pathfinder()
-        self.solution = path.find_path('Whimbrel Place, Woronora Heights, NSW','Pelican Place, Woronora Heights, NSW')
-        self.start = (path.get_source()[1], path.get_source()[0])
-        self.m = folium.Map(location = self.start, zoom_start=17)
+        self.start = ()
+        self.end = ()
+        self.m = None
     
-    def render_path(self):
-        folium.GeoJson(self.solution).add_to(self.m)
-        self.m.save("index.html")
+    def render_path(self, start, end, path):
+        self.start = (start[1], start[0])
+        self.end = end
+        folium.GeoJson(path).add_to(self.m)
+        self.m = folium.Map(location = self.start, zoom_start=17)
+        self.insert_start_image()
+        self.insert_end_image()
+        self.m.save("map.html")
+        webbrowser.open("map.html")
 
     def insert_start_image(self):
-        icon1 = folium.Icon(color="red", icon="glyphicon-home")
-        marker1 = folium.Marker(location=self.start, icon=icon1).add_to(self.m)
+        icon = folium.Icon(color="red", icon="glyphicon-home")
+        marker = folium.Marker(location=self.start, icon=icon).add_to(self.m)
+    
+    def insert_end_image(self):
+        icon = folium.Icon(color="red", icon="glyphicon-home")
+        marker = folium.Marker(location=self.start, icon=icon).add_to(self.m)
