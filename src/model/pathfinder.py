@@ -1,4 +1,5 @@
 import osmnx as ox
+
 from src.model.dijkstra import Dijkstra
 from geojson import Feature, FeatureCollection, LineString
 

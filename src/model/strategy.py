@@ -20,19 +20,19 @@ class Strategy(ABC):
 		"""
 		pass
 	
-	def get_elevation(self, G, latitude, longitude):
+	def get_elevation(self, G, node_id):
 		"""
-		Get the elevation given a coordinate.
+		Get the elevation given a node in graph.
 		
 		Parameters:
 		G (Multidigraph): The graph of the area
-		latitude (float): Coordinate y
-		longitude (float): Coordinate x
+		node_id (int): The id of the node
 		
 		Returns:
 		float: Elevation
 		"""
-		
+		longitude = G._node[node_id]['x']
+		latitude = G._node[node_id]['y']
 		data = requests.get('https://api.open-elevation.com/api/v1/lookup?locations='+str(latitude)+','+str(longitude))
 		if data.status_code >= 400:
 			print('Error getting elevation for '+str(latitude)+','+str(longitude))

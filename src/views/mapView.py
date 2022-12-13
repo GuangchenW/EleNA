@@ -1,5 +1,6 @@
 import webbrowser
 import folium
+import os
 
 class MapView:
     def __init__(self):
@@ -23,7 +24,7 @@ class MapView:
         self.insert_start_image()
         self.insert_end_image()
         self.m.save("map.html")
-        webbrowser.open("map.html", new=2)
+        webbrowser.open('file://' + os.path.realpath('map.html'), new=2)
 
     def insert_start_image(self):
         """
