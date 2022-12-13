@@ -1,5 +1,5 @@
 import osmnx as ox
-from .dijkstra import Dijkstra
+from src.model.dijkstra import Dijkstra
 from geojson import Feature, FeatureCollection, LineString
 
 class Pathfinder:
@@ -22,7 +22,6 @@ class Pathfinder:
 		string: json string containing list of coordinates (long, lat) as feature collection.
 		"""
 		
-		# TODO: use geopandas to to geoencoding
 		G = ox.graph_from_address(src, dist=500, network_type=path_type, return_coords=True, simplify=True)
 		H = ox.geocoder.geocode(dest)
 		#print(H)
@@ -94,9 +93,10 @@ class Pathfinder:
 		strategy (:Strategy): The pathfinding strategy to be used.
 		"""
 		self.strategy = strategy
-		
-#p = Pathfinder()
-#p.find_path('Whimbrel Place, Woronora Heights, NSW','Pelican Place, Woronora Heights, NSW')
-#print(p.get_source())
-#for n in p.find_path('Whimbrel Place, Woronora Heights, NSW','Pelican Place, Woronora Heights, NSW'):
-#	print(n)
+
+if __name__=='__main__':
+	p = Pathfinder()
+	p.find_path('Whimbrel Place, Woronora Heights, NSW','Pelican Place, Woronora Heights, NSW')
+	#print(p.get_source())
+	#for n in p.find_path('Whimbrel Place, Woronora Heights, NSW','Pelican Place, Woronora Heights, NSW'):
+	#	print(n)

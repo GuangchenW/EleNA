@@ -1,8 +1,8 @@
 from importlib.resources import path
 from pathlib import Path
 from flexx import flx
-from model.pathfinder import Pathfinder
-from .mapView import MapView
+from src.model.pathfinder import Pathfinder
+from src.views.mapView import MapView
 
 
 class user_input(flx.PyWidget):
