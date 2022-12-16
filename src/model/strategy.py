@@ -11,8 +11,8 @@ class Strategy(ABC):
 	
 		Parameters:
 		G (Multidigraph): The graph of the area
-		src (latitude, longitude): The starting corrdinate
-		dest (latitude, longitude): The destination corrdinate
+		source_node (node_id): The starting node
+		destination_node (node_id): The destination node
 		max_elevation_gain (boolean): Whether the path should minimize or maximize elevation gain
 	
 		Returns:

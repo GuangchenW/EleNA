@@ -117,8 +117,8 @@ class Pathfinder:
 		self.strategy = strategy
 
 if __name__=='__main__':
-	p = Pathfinder()
-	p.find_path('277 Triangle Street, Amherst, MA 01002','112 Eastman Lane, Amherst, MA 01003', max_elevation_gain=True)
+	#p = Pathfinder()
+	#p.find_path('277 Triangle Street, Amherst, MA 01002','112 Eastman Lane, Amherst, MA 01003', max_elevation_gain=True)
 	#print(ox.geocoder.geocode('50'))
 	#print(p.get_source())
 	pass

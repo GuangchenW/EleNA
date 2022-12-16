@@ -10,6 +10,9 @@ PREVIEW_FLAG = 'preview'
 CURRENT_DIRECTORY = os.path.dirname(__file__)
 
 def main():
+	"""
+	Usage: python mapManager.py -download [place] [-preview]
+	"""
 	if len(sys.argv) <= 1:
 		print('Requires the name of a place (with no whitespace), e.g. Amherst,MA,USA')
 		return
@@ -34,13 +37,25 @@ def main():
 	download_graph(place, preview=preview)
 	
 def download_graph(place, preview=False):
+	"""
+	Download map data using OSMnx and save to disk.
+	
+	Parameters:
+	place (str): Name of the area, e.g. Amherst,MA,USA
+	preview (boolean): Whether to show preview of map once download completes
+	"""
 	G = ox.graph_from_place(place, simplify=False, network_type='drive')
 	ox.io.save_graphml(G)
 	if preview:
 		ox.plot.plot_graph(G)
 		
 def download_evelation(G):
-
+	"""
+	Download elevation data using open-evelation and save to disk.
+	
+	Paramter:
+	G (MultiDiGraph): The map of the area
+	"""
 	nodeId = []
 	for node in G.nodes():
 		nodeId.append(node)
@@ -95,6 +110,12 @@ def get_graph():
 	return G
 	
 def get_elevation_data():
+	"""
+	Load the saved elevation data from disk.
+	
+	Returns:
+	dict, or None if no saved data exists.
+	"""
 	if not os.path.exists(os.path.join(CURRENT_DIRECTORY, './data/elevation.json')):
 		raise Exception("Cannot find saved elevation data. Have you downloaded any yet?")
 		return None
@@ -104,6 +125,4 @@ def get_elevation_data():
 	return elevation_data
 	
 if __name__=='__main__':
-	#main()
-	G = get_graph()
-	download_evelation(G)
+	main()
