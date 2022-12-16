@@ -59,9 +59,9 @@ class user_input(flx.PyWidget):
         self.startLoc = self.start_location.text
         self.endLoc = self.end_location.text
         if(self.choice1.checked):
-            self.EGain = True
-        elif(self.choice2.checked):
             self.EGain = False
+        elif(self.choice2.checked):
+            self.EGain = True
         else:
             self.EGain = False
         self.infoLabel.set_text('Calculating route from ' + self.startLoc + ' to ' + self.endLoc + '. (Loading...)')
