@@ -54,6 +54,7 @@ class user_input(flx.PyWidget):
         At the same time, user interface will print the information for start and end location, 
         so for the elevation gain.
         """
+        self.confirming.set_disabled(True)
         self.startLoc = self.start_location.text
         self.endLoc = self.end_location.text
         if(self.choice1.checked):
@@ -62,8 +63,10 @@ class user_input(flx.PyWidget):
             self.EGain = False
         else:
             self.EGain = False
-        self.infoLabel.set_text('Depart from ' + self.startLoc + ' and arrive at ' + self.endLoc + ' .')
+        self.infoLabel.set_text('Calculating route from ' + self.startLoc + ' to ' + self.endLoc + '. (Loading...)')
         self.solution = self.pathfinder.find_path(self.startLoc, self.endLoc)
+        self.infoLabel.set_text('Calculating route from ' + self.startLoc + ' to ' + self.endLoc + '. (Complete!)')
+        self.confirming.set_disabled(False)
         self.map_view.render_path(self.pathfinder.get_source(), self.pathfinder.get_destination(), self.solution)
 
     
