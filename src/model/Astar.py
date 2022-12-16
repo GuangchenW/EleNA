@@ -5,7 +5,7 @@ import math
 
 from src.model.strategy import Strategy
 
-class Dijkstra(Strategy):
+class Astar(Strategy):
 	
 	def __init__(self, G, elevation_data):
 		self.max_elevation_gain = False
@@ -14,9 +14,8 @@ class Dijkstra(Strategy):
 	
 	def find_path(self, source_node, destination_node, max_elevation_gain=False):
 		self.max_elevation_gain = max_elevation_gain
-		queue = [(0,(source_node,-1))]
+		queue = [(self.calculate_heuristic(self.G, source_node, destination_node),(source_node,-1))]
 		explored = {}
-		
 		curr_node = heapq.heappop(queue)
 		while not curr_node[1][0] == destination_node:
 			if curr_node[1][0] in explored.keys():
@@ -26,7 +25,7 @@ class Dijkstra(Strategy):
 				curr_node = heapq.heappop(queue)
 			else:
 				explored[curr_node[1][0]] = curr_node[1][1]
-				self.add_neighbors_to_queue(queue, explored, self.G, self.elevation_data, curr_node)
+				self.add_neighbors_to_queue(queue, explored, self.G, self.elevation_data, curr_node, destination_node)
 				curr_node = heapq.heappop(queue)
 		explored[curr_node[1][0]]=curr_node[1][1]
 		
@@ -42,7 +41,7 @@ class Dijkstra(Strategy):
 		#return list(map(lambda n: (G._node[n]['x'], G._node[n]['y']), route))
 		return list(route)
 		
-	def add_neighbors_to_queue(self, queue, explored, G, elevation_data, curr_node):
+	def add_neighbors_to_queue(self, queue, explored, G, elevation_data, curr_node, dest_node_id):
 		node_id = curr_node[1][0]
 		curr_elevation = self.get_elevation(node_id)
 		for n in G.neighbors(node_id):
@@ -53,14 +52,26 @@ class Dijkstra(Strategy):
 			elevation_gain = self.get_elevation(n)-curr_elevation
 			elevation_gain = 0.1 if elevation_gain <= 0 else elevation_gain
 			#elevation_gain = 0
-			heapq.heappush(queue, (self.calculate_edge_weight(distance, elevation_gain)+curr_node[0], (n, node_id)))
+			totalWeight = curr_node[0] - self.calculate_heuristic(G, node_id, dest_node_id) + self.calculate_edge_weight(distance, elevation_gain) + self.calculate_heuristic(G, n, dest_node_id)
+			heapq.heappush(queue, (totalWeight, (n, node_id)))
 	
 	def calculate_edge_weight(self, distance, elevation_gain):
 		if self.max_elevation_gain:
-			return math.sqrt(distance)/(elevation_gain**2)
+			return distance/elevation_gain/100
 		else:
 			return distance
 			#return math.sqrt(distance**2 + elevation_gain**2)
+	
+	def calculate_heuristic(self, G, node_id, dest_node_id):
+		lat1, lng1 = G._node[node_id]['y'], G._node[node_id]['x']
+		lat2, lng2 = G._node[dest_node_id]['y'], G._node[dest_node_id]['x']
+		euclidean_dist = ox.distance.great_circle_vec(lat1, lng1, lat2, lng2)
+		if self.max_elevation_gain:			
+			elevation_diff = self.get_elevation(dest_node_id) - self.get_elevation(node_id)
+			elevation_diff = 0.1 if elevation_diff <= 0 else elevation_diff
+			return euclidean_dist/elevation_diff/100
+		else:
+			return euclidean_dist
 	
 	def get_elevation(self, node_id):
 		return self.elevation_data[str(node_id)]

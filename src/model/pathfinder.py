@@ -2,6 +2,7 @@ import osmnx as ox
 
 import src.model.mapManager as mapManager
 from src.model.dijkstra import Dijkstra
+from src.model.Astar import Astar
 from geojson import Feature, FeatureCollection, LineString
 
 class Pathfinder:
@@ -41,11 +42,12 @@ class Pathfinder:
 		if destination_error > 400:
 			print("Cannot find a point on map close to the starting address")
 			return None
-		
+
 		path = self.strategy.find_path(source_node, destination_node, max_elevation_gain)
 		if path is None:
 			print('Cannot find path')
 			return None
+		print(len(path))
 		path_coords = self.construct_path(G, path)
 		
 		self.source = path_coords[0]
@@ -116,7 +118,7 @@ class Pathfinder:
 
 if __name__=='__main__':
 	p = Pathfinder()
-	p.find_path('121 Presidents Drive, Amherst, MA 01003','112 Eastman Lane, Amherst, MA 01003', max_elevation_gain=True)
+	p.find_path('277 Triangle Street, Amherst, MA 01002','112 Eastman Lane, Amherst, MA 01003', max_elevation_gain=True)
 	#print(ox.geocoder.geocode('50'))
 	#print(p.get_source())
 	pass
