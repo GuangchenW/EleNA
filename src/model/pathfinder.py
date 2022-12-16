@@ -7,7 +7,8 @@ from geojson import Feature, FeatureCollection, LineString
 class Pathfinder:
 	def __init__(self):
 		self.map = mapManager.get_graph()
-		self.strategy = Dijkstra()
+		self.elevation_data = mapManager.get_elevation_data()
+		self.strategy = Dijkstra(self.map, self.elevation_data)
 		self.source = ""
 		self.destination = ""
 	
@@ -27,10 +28,21 @@ class Pathfinder:
 		
 		#G = ox.graph_from_address(src, dist=500, network_type=path_type, return_coords=True, simplify=True)
 		G = self.map
-		S = ox.geocoder.geocode(src)
-		D = ox.geocoder.geocode(dest)
-		#print(H)
-		path = self.strategy.find_path(G, S, D, max_elevation_gain)
+
+		src = ox.geocoder.geocode(src)
+		dest = ox.geocoder.geocode(dest)
+		
+		source_node, source_error = ox.distance.nearest_nodes(G, src[1], src[0], return_dist=True)
+		destination_node, destination_error = ox.distance.nearest_nodes(G, dest[1], dest[0], return_dist=True)
+		
+		if source_error > 400:
+			print("Cannot find a point on map close to the starting address")
+			return None
+		if destination_error > 400:
+			print("Cannot find a point on map close to the starting address")
+			return None
+		
+		path = self.strategy.find_path(source_node, destination_node, max_elevation_gain)
 		if path is None:
 			print('Cannot find path')
 			return None
@@ -103,9 +115,8 @@ class Pathfinder:
 		self.strategy = strategy
 
 if __name__=='__main__':
-	#p = Pathfinder()
-	#p.find_path('Whimbrel Place, Woronora Heights, NSW','Pelican Place, Woronora Heights, NSW')
-	print(ox.geocoder.geocode('50'))
+	p = Pathfinder()
+	p.find_path('121 Presidents Drive, Amherst, MA 01003','112 Eastman Lane, Amherst, MA 01003', max_elevation_gain=True)
+	#print(ox.geocoder.geocode('50'))
 	#print(p.get_source())
-	#for n in p.find_path('Whimbrel Place, Woronora Heights, NSW','Pelican Place, Woronora Heights, NSW'):
-	#	print(n)
+	pass

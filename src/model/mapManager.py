@@ -7,6 +7,7 @@ import json
 
 DOWNLOAD_FLAG = 'download'
 PREVIEW_FLAG = 'preview'
+CURRENT_DIRECTORY = os.path.dirname(__file__)
 
 def main():
 	if len(sys.argv) <= 1:
@@ -76,12 +77,31 @@ def download_evelation(G):
 		if pointer > len(nodeId)-1:
 			break
 		
-	with open(os.path.join(os.path.dirname(__file__), './data/elevation.json'), "w") as outfile:
+	with open(os.path.join(CURRENT_DIRECTORY, './data/elevation.json'), "w") as outfile:
 		json.dump(elevation_map, outfile)
 		
 def get_graph():
-	G = ox.load_graphml(filepath=os.path.join(os.path.dirname(__file__), './data/graph.graphml'))
+	"""
+	Load the saved map from disk.
+	
+	Returns:
+	MultiDiGraph, or None if no saved graph exists.
+	"""
+	if not os.path.exists(os.path.join(CURRENT_DIRECTORY, './data/graph.graphml')):
+		raise Exception("Cannot find saved map. Have you downloaded any yet?")
+		return None
+	
+	G = ox.load_graphml(filepath=os.path.join(CURRENT_DIRECTORY, './data/graph.graphml'))
 	return G
+	
+def get_elevation_data():
+	if not os.path.exists(os.path.join(CURRENT_DIRECTORY, './data/elevation.json')):
+		raise Exception("Cannot find saved elevation data. Have you downloaded any yet?")
+		return None
+	
+	with open(os.path.join(CURRENT_DIRECTORY, './data/elevation.json'), 'r') as f:
+		elevation_data = json.load(f)
+	return elevation_data
 	
 if __name__=='__main__':
 	#main()
