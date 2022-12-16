@@ -2,6 +2,7 @@ import osmnx as ox
 
 import src.model.mapManager as mapManager
 from src.model.dijkstra import Dijkstra
+from src.model.Astar import Astar
 from geojson import Feature, FeatureCollection, LineString
 
 class Pathfinder:
@@ -12,7 +13,7 @@ class Pathfinder:
 		self.source = ""
 		self.destination = ""
 	
-	def find_path(self, src, dest, path_type='drive', max_elevation_gain=False):
+	def find_path(self, src, dest, path_type='drive', max_elevation_gain=True):
 		"""
 		Find a path given the start and end point and the appropriate parameters.
 		
@@ -116,7 +117,7 @@ class Pathfinder:
 
 if __name__=='__main__':
 	p = Pathfinder()
-	p.find_path('121 Presidents Drive, Amherst, MA 01003','112 Eastman Lane, Amherst, MA 01003', max_elevation_gain=True)
+	p.find_path('277 Triangle Street, Amherst, MA 01002','112 Eastman Lane, Amherst, MA 01003', max_elevation_gain=True)
 	#print(ox.geocoder.geocode('50'))
 	#print(p.get_source())
 	pass
