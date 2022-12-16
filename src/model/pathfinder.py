@@ -13,7 +13,7 @@ class Pathfinder:
 		self.source = ""
 		self.destination = ""
 	
-	def find_path(self, src, dest, path_type='drive', max_elevation_gain=True):
+	def find_path(self, src, dest, path_type='drive', max_elevation_gain=False):
 		"""
 		Find a path given the start and end point and the appropriate parameters.
 		
@@ -42,11 +42,12 @@ class Pathfinder:
 		if destination_error > 400:
 			print("Cannot find a point on map close to the starting address")
 			return None
-		
+
 		path = self.strategy.find_path(source_node, destination_node, max_elevation_gain)
 		if path is None:
 			print('Cannot find path')
 			return None
+		print(len(path))
 		path_coords = self.construct_path(G, path)
 		
 		self.source = path_coords[0]

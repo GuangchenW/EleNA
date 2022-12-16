@@ -16,7 +16,6 @@ class Astar(Strategy):
 		self.max_elevation_gain = max_elevation_gain
 		queue = [(self.calculate_heuristic(self.G, source_node, destination_node),(source_node,-1))]
 		explored = {}
-		
 		curr_node = heapq.heappop(queue)
 		while not curr_node[1][0] == destination_node:
 			if curr_node[1][0] in explored.keys():
@@ -58,7 +57,7 @@ class Astar(Strategy):
 	
 	def calculate_edge_weight(self, distance, elevation_gain):
 		if self.max_elevation_gain:
-			return math.sqrt(distance)/(elevation_gain**2)
+			return distance/elevation_gain/100
 		else:
 			return distance
 			#return math.sqrt(distance**2 + elevation_gain**2)
@@ -67,10 +66,10 @@ class Astar(Strategy):
 		lat1, lng1 = G._node[node_id]['y'], G._node[node_id]['x']
 		lat2, lng2 = G._node[dest_node_id]['y'], G._node[dest_node_id]['x']
 		euclidean_dist = ox.distance.great_circle_vec(lat1, lng1, lat2, lng2)
-		if self.max_elevation_gain:
+		if self.max_elevation_gain:			
 			elevation_diff = self.get_elevation(dest_node_id) - self.get_elevation(node_id)
 			elevation_diff = 0.1 if elevation_diff <= 0 else elevation_diff
-			return math.sqrt(euclidean_dist)/(elevation_diff**2)
+			return euclidean_dist/elevation_diff/100
 		else:
 			return euclidean_dist
 	
