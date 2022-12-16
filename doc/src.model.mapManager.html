@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module src.model.mapManager</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="src.html"><font color="#ffffff">src</font></a>.<a href="src.model.html"><font color="#ffffff">model</font></a>.mapManager</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/guangchenw/Documents/School/CS%20520/FinalProject/EleNA/src/model/mapManager.py">/Users/guangchenw/Documents/School/CS 520/FinalProject/EleNA/src/model/mapManager.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="json.html">json</a><br>
+<a href="networkx.html">networkx</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+<a href="osmnx.html">osmnx</a><br>
+</td><td width="25%" valign=top><a href="requests.html">requests</a><br>
+<a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-download_evelation"><strong>download_evelation</strong></a>(G)</dt><dd><tt>Download&nbsp;elevation&nbsp;data&nbsp;using&nbsp;open-evelation&nbsp;and&nbsp;save&nbsp;to&nbsp;disk.<br>
+&nbsp;<br>
+Paramter:<br>
+G&nbsp;(MultiDiGraph):&nbsp;The&nbsp;map&nbsp;of&nbsp;the&nbsp;area</tt></dd></dl>
+ <dl><dt><a name="-download_graph"><strong>download_graph</strong></a>(place, preview=False)</dt><dd><tt>Download&nbsp;map&nbsp;data&nbsp;using&nbsp;OSMnx&nbsp;and&nbsp;save&nbsp;to&nbsp;disk.<br>
+&nbsp;<br>
+Parameters:<br>
+place&nbsp;(str):&nbsp;Name&nbsp;of&nbsp;the&nbsp;area,&nbsp;e.g.&nbsp;Amherst,MA,USA<br>
+preview&nbsp;(boolean):&nbsp;Whether&nbsp;to&nbsp;show&nbsp;preview&nbsp;of&nbsp;map&nbsp;once&nbsp;download&nbsp;completes</tt></dd></dl>
+ <dl><dt><a name="-get_elevation_data"><strong>get_elevation_data</strong></a>()</dt><dd><tt>Load&nbsp;the&nbsp;saved&nbsp;elevation&nbsp;data&nbsp;from&nbsp;disk.<br>
+&nbsp;<br>
+Returns:<br>
+dict,&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;saved&nbsp;data&nbsp;exists.</tt></dd></dl>
+ <dl><dt><a name="-get_graph"><strong>get_graph</strong></a>()</dt><dd><tt>Load&nbsp;the&nbsp;saved&nbsp;map&nbsp;from&nbsp;disk.<br>
+&nbsp;<br>
+Returns:<br>
+MultiDiGraph,&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;saved&nbsp;graph&nbsp;exists.</tt></dd></dl>
+ <dl><dt><a name="-main"><strong>main</strong></a>()</dt><dd><tt>Usage:&nbsp;python&nbsp;mapManager.py&nbsp;-download&nbsp;[place]&nbsp;[-preview]</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>CURRENT_DIRECTORY</strong> = '/Users/guangchenw/Documents/School/CS 520/FinalProject/EleNA/src/model'<br>
+<strong>DOWNLOAD_FLAG</strong> = 'download'<br>
+<strong>PREVIEW_FLAG</strong> = 'preview'</td></tr></table>
+</body></html>
