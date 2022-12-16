@@ -21,15 +21,15 @@ class user_input(flx.PyWidget):
         #user interface box
         with flx.VBox():
             with flx.HBox():
-                self.start_location = flx.LineEdit(placeholder_text = 'departure..')
-                self.end_location = flx.LineEdit(placeholder_text = 'arrival..')
+                self.start_location = flx.LineEdit(placeholder_text = 'From...')
+                self.end_location = flx.LineEdit(placeholder_text = 'To...')
             with flx.VBox():
                 self.choice1 = flx.RadioButton(text = 'min Elevation Gain')
                 self.choice2 = flx.RadioButton(text = 'max Elevation Gain')
                 #self.infoLabel = flx.Label(text = '...')
             with flx.HBox():
                 self.resetting = flx.Button(text = 'Reset')
-                self.confirming = flx.Button(text = 'confirm')
+                self.confirming = flx.Button(text = 'Confirm')
             with flx.VBox():
                 self.infoLabel = flx.Label()
     
