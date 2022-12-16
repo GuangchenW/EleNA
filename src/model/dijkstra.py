@@ -13,8 +13,15 @@ class Dijkstra(Strategy):
 	# TODO: Implement dijkstra's from scratch
 	def find_path(self, G, src, dest, max_elevation_gain=False):
 		self.max_elevation_gain = max_elevation_gain
-		source_node = ox.distance.nearest_nodes(G, src[1], src[0])
-		destination_node = ox.distance.nearest_nodes(G, dest[1], dest[0])
+		source_node, source_error = ox.distance.nearest_nodes(G, src[1], src[0], return_dist=True)
+		destination_node, destination_error = ox.distance.nearest_nodes(G, dest[1], dest[0], return_dist=True)
+		
+		if source_error > 400:
+			print("Cannot find a point on map close to the starting address")
+			return None
+		if destination_error > 400:
+			print("Cannot find a point on map close to the starting address")
+			return None
 		
 		queue = [(0,(source_node,-1))]
 		explored = {}
@@ -25,15 +32,13 @@ class Dijkstra(Strategy):
 			if curr_node[1][0] in explored.keys():
 				if len(queue) <= 0:
 					print('Path not found')
-					return []
+					return None
 				curr_node = heapq.heappop(queue)
 			else:
 				explored[curr_node[1][0]] = curr_node[1][1]
 				self.add_neighbors_to_queue(queue, explored, G, curr_node)
 				curr_node = heapq.heappop(queue)
 		explored[curr_node[1][0]]=curr_node[1][1]
-		
-
 		
 		route = [curr_node[1][0]]
 		while explored[route[-1]] >= 0:

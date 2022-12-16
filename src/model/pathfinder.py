@@ -31,6 +31,9 @@ class Pathfinder:
 		D = ox.geocoder.geocode(dest)
 		#print(H)
 		path = self.strategy.find_path(G, S, D, max_elevation_gain)
+		if path is None:
+			print('Cannot find path')
+			return None
 		path_coords = self.construct_path(G, path)
 		
 		self.source = path_coords[0]
@@ -100,8 +103,9 @@ class Pathfinder:
 		self.strategy = strategy
 
 if __name__=='__main__':
-	p = Pathfinder()
-	p.find_path('Whimbrel Place, Woronora Heights, NSW','Pelican Place, Woronora Heights, NSW')
+	#p = Pathfinder()
+	#p.find_path('Whimbrel Place, Woronora Heights, NSW','Pelican Place, Woronora Heights, NSW')
+	print(ox.geocoder.geocode('50'))
 	#print(p.get_source())
 	#for n in p.find_path('Whimbrel Place, Woronora Heights, NSW','Pelican Place, Woronora Heights, NSW'):
 	#	print(n)
