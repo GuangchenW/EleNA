@@ -1,10 +1,12 @@
 import osmnx as ox
 
+import src.model.mapManager as mapManager
 from src.model.dijkstra import Dijkstra
 from geojson import Feature, FeatureCollection, LineString
 
 class Pathfinder:
 	def __init__(self):
+		self.map = mapManager.get_graph()
 		self.strategy = Dijkstra()
 		self.source = ""
 		self.destination = ""
@@ -23,11 +25,13 @@ class Pathfinder:
 		string: json string containing list of coordinates (long, lat) as feature collection.
 		"""
 		
-		G = ox.graph_from_address(src, dist=500, network_type=path_type, return_coords=True, simplify=True)
-		H = ox.geocoder.geocode(dest)
+		#G = ox.graph_from_address(src, dist=500, network_type=path_type, return_coords=True, simplify=True)
+		G = self.map
+		S = ox.geocoder.geocode(src)
+		D = ox.geocoder.geocode(dest)
 		#print(H)
-		path = self.strategy.find_path(G[0], G[1], H, max_elevation_gain)
-		path_coords = self.construct_path(G[0], path)
+		path = self.strategy.find_path(G, S, D, max_elevation_gain)
+		path_coords = self.construct_path(G, path)
 		
 		self.source = path_coords[0]
 		self.destination = path_coords[-1]
@@ -67,7 +71,7 @@ class Pathfinder:
 				y1 = G.nodes[u]['y']
 				x2 = G.nodes[v]['x']
 				y2 = G.nodes[v]['y']
-				if (lines[-1] != (x1, y1)):
+				if len(lines) <= 0 or lines[-1] != (x1, y1):
 					lines.append((x1, y1))
 				lines.append((x2, y2))
 		return lines

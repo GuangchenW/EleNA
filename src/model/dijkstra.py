@@ -51,7 +51,7 @@ class Dijkstra(Strategy):
 		#curr_elevation = self.get_elevation(G, node_id)
 		for n in G.neighbors(node_id):
 			if n in explored.keys():
-				print('continued')
+				#print('continued')
 				continue
 			distance = min(G.get_edge_data(node_id, n).values(), key=lambda x: x['length'])['length']
 			#elevation_gain = self.get_elevation(G, n)-curr_elevation
