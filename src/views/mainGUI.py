@@ -65,7 +65,10 @@ class user_input(flx.PyWidget):
             self.EGain = False
         self.infoLabel.set_text('Calculating route from ' + self.startLoc + ' to ' + self.endLoc + '. (Loading...)')
         self.solution = self.pathfinder.find_path(self.startLoc, self.endLoc)
-        self.infoLabel.set_text('Calculating route from ' + self.startLoc + ' to ' + self.endLoc + '. (Complete!)')
+        if (self.solution == None):
+            self.infoLabel.set_text('Error: invalid address(es).')
+        else:
+            self.infoLabel.set_text('Calculating route from ' + self.startLoc + ' to ' + self.endLoc + '. (Complete!)')
         self.confirming.set_disabled(False)
         self.map_view.render_path(self.pathfinder.get_source(), self.pathfinder.get_destination(), self.solution)
 
