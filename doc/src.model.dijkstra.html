@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module src.model.dijkstra</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="src.html"><font color="#ffffff">src</font></a>.<a href="src.model.html"><font color="#ffffff">model</font></a>.dijkstra</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/guangchenw/Documents/School/CS%20520/FinalProject/EleNA/src/model/dijkstra.py">/Users/guangchenw/Documents/School/CS 520/FinalProject/EleNA/src/model/dijkstra.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="heapq.html">heapq</a><br>
+</td><td width="25%" valign=top><a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="networkx.html">networkx</a><br>
+</td><td width="25%" valign=top><a href="osmnx.html">osmnx</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="src.model.strategy.html#Strategy">src.model.strategy.Strategy</a>(<a href="abc.html#ABC">abc.ABC</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="src.model.dijkstra.html#Dijkstra">Dijkstra</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Dijkstra">class <strong>Dijkstra</strong></a>(<a href="src.model.strategy.html#Strategy">src.model.strategy.Strategy</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Dijkstra">Dijkstra</a>(G,&nbsp;elevation_data)<br>
+&nbsp;<br>
+<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="src.model.dijkstra.html#Dijkstra">Dijkstra</a></dd>
+<dd><a href="src.model.strategy.html#Strategy">src.model.strategy.Strategy</a></dd>
+<dd><a href="abc.html#ABC">abc.ABC</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Dijkstra-__init__"><strong>__init__</strong></a>(self, G, elevation_data)</dt><dd><tt>Parameters:<br>
+G&nbsp;(MultiDiGraph):&nbsp;Map&nbsp;of&nbsp;the&nbsp;area<br>
+elevation_data&nbsp;(dict):&nbsp;Elevation&nbsp;data&nbsp;of&nbsp;each&nbsp;node&nbsp;on&nbsp;the&nbsp;map</tt></dd></dl>
+
+<dl><dt><a name="Dijkstra-add_neighbors_to_queue"><strong>add_neighbors_to_queue</strong></a>(self, queue, explored, G, elevation_data, curr_node)</dt></dl>
+
+<dl><dt><a name="Dijkstra-calculate_edge_weight"><strong>calculate_edge_weight</strong></a>(self, distance, elevation_gain)</dt><dd><tt>Calculate&nbsp;the&nbsp;edge&nbsp;weight&nbsp;based&nbsp;on&nbsp;distance&nbsp;and&nbsp;elevation&nbsp;gain&nbsp;between&nbsp;two&nbsp;nodes.<br>
+&nbsp;<br>
+Parameters:<br>
+distance&nbsp;(float):&nbsp;Distance&nbsp;between&nbsp;two&nbsp;nodes<br>
+elevation_gain&nbsp;(float):&nbsp;Elevation&nbsp;gain&nbsp;between&nbsp;two&nbsp;nodes<br>
+&nbsp;<br>
+Returns:<br>
+(edge_weight)</tt></dd></dl>
+
+<dl><dt><a name="Dijkstra-find_path"><strong>find_path</strong></a>(self, source_node, destination_node, max_elevation_gain=False)</dt><dd><tt>Find&nbsp;a&nbsp;path&nbsp;in&nbsp;the&nbsp;graph&nbsp;that&nbsp;satisfies&nbsp;the&nbsp;parameters.<br>
+&nbsp;<br>
+Parameters:<br>
+G&nbsp;(Multidigraph):&nbsp;The&nbsp;graph&nbsp;of&nbsp;the&nbsp;area<br>
+source_node&nbsp;(node_id):&nbsp;The&nbsp;starting&nbsp;node<br>
+destination_node&nbsp;(node_id):&nbsp;The&nbsp;destination&nbsp;node<br>
+max_elevation_gain&nbsp;(boolean):&nbsp;Whether&nbsp;the&nbsp;path&nbsp;should&nbsp;minimize&nbsp;or&nbsp;maximize&nbsp;elevation&nbsp;gain<br>
+&nbsp;<br>
+Returns:<br>
+int[]:&nbsp;A&nbsp;list&nbsp;of&nbsp;node&nbsp;ids</tt></dd></dl>
+
+<dl><dt><a name="Dijkstra-get_elevation"><strong>get_elevation</strong></a>(self, node_id)</dt><dd><tt>Get&nbsp;the&nbsp;elevation&nbsp;of&nbsp;a&nbsp;node&nbsp;on&nbsp;the&nbsp;map.<br>
+&nbsp;<br>
+Parameter:<br>
+node_id&nbsp;(int):&nbsp;ID&nbsp;of&nbsp;the&nbsp;node<br>
+&nbsp;<br>
+Returns:<br>
+(int):&nbsp;Elevation</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+<hr>
+Data descriptors inherited from <a href="src.model.strategy.html#Strategy">src.model.strategy.Strategy</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>
