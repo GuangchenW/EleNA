@@ -95,7 +95,7 @@ def download_evelation(G):
 	with open(os.path.join(CURRENT_DIRECTORY, './data/elevation.json'), "w") as outfile:
 		json.dump(elevation_map, outfile)
 		
-def get_graph():
+def get_map():
 	"""
 	Load the saved map from disk.
 	

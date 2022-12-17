@@ -7,7 +7,7 @@ from geojson import Feature, FeatureCollection, LineString
 
 class Pathfinder:
 	def __init__(self):
-		self.map = mapManager.get_graph()
+		self.map = mapManager.get_map()
 		self.elevation_data = mapManager.get_elevation_data()
 		self.strategy = Dijkstra(self.map, self.elevation_data)
 		self.source = ""
@@ -27,11 +27,13 @@ class Pathfinder:
 		string: json string containing list of coordinates (long, lat) as feature collection.
 		"""
 		
-		#G = ox.graph_from_address(src, dist=500, network_type=path_type, return_coords=True, simplify=True)
 		G = self.map
-
-		src = ox.geocoder.geocode(src)
-		dest = ox.geocoder.geocode(dest)
+		try:
+			src = ox.geocoder.geocode(src)
+			dest = ox.geocoder.geocode(dest)
+		except ValueError as ve:
+			print("Cannot geocode addresses")
+			return None
 		
 		source_node, source_error = ox.distance.nearest_nodes(G, src[1], src[0], return_dist=True)
 		destination_node, destination_error = ox.distance.nearest_nodes(G, dest[1], dest[0], return_dist=True)
@@ -44,10 +46,10 @@ class Pathfinder:
 			return None
 
 		path = self.strategy.find_path(source_node, destination_node, max_elevation_gain)
-		if path is None:
+		if path is None or len(path) < 1:
 			print('Cannot find path')
 			return None
-		print(len(path))
+		print('Path length', len(path))
 		path_coords = self.construct_path(G, path)
 		
 		self.source = path_coords[0]
@@ -69,6 +71,9 @@ class Pathfinder:
 		Returns:
 		(logitude, latitude)[]: A list of coordinates representing the path.
 		"""
+		
+		if len(route) == 1:
+			return [(G._node[route[0]]['y'],G._node[route[0]]['x'])]
 		
 		edge_nodes = list(zip(route[:-1], route[1:]))
 		lines = []
@@ -114,15 +119,15 @@ class Pathfinder:
 		Parameters:
 		strategy (str): The pathfinding strategy to be used.
 		"""
-		if (strategy == 'Astar'):
+		if (strategy == 'astar'):
 			self.strategy = Astar(self.map, self.elevation_data)
 		else:
 			self.strategy = Dijkstra(self.map, self.elevation_data)
 			
 
 if __name__=='__main__':
-	#p = Pathfinder()
-	#p.find_path('277 Triangle Street, Amherst, MA 01002','112 Eastman Lane, Amherst, MA 01003', max_elevation_gain=True)
+	p = Pathfinder()
+	p.find_path('277 Triangle Street, Amherst, MA 01002','112 Eastman Lane, Amherst, MA 01003', max_elevation_gain=False)
 	#print(ox.geocoder.geocode('50'))
 	#print(p.get_source())
 	pass

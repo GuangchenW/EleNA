@@ -11,7 +11,7 @@ class Dijkstra(Strategy):
 		"""
 		Parameters:
 		G (MultiDiGraph): Map of the area
-		elevation_data (dict): Elevation data of each node om the map
+		elevation_data (dict): Elevation data of each node on the map
 		"""
 		self.max_elevation_gain = False
 		self.G = G
@@ -43,6 +43,7 @@ class Dijkstra(Strategy):
 			
 		#route = nx.shortest_path(self.G, source_node, destination_node)
 		
+		
 		#fig, ax = ox.plot_graph_route(G, route, node_size=1, figsize=(40,40))
 		return list(route)
 		
@@ -71,7 +72,7 @@ class Dijkstra(Strategy):
 		if self.max_elevation_gain:
 			return math.sqrt(distance)/(elevation_gain**2)
 		else:
-			return distance+elevation_gain
+			return distance
 	
 	def get_elevation(self, node_id):
 		"""

@@ -68,7 +68,7 @@ class Astar(Strategy):
 		if self.max_elevation_gain:
 			return distance/elevation_gain/100
 		else:
-			return distance+elevation_gain
+			return distance
 	
 	def calculate_heuristic(self, G, node_id, dest_node_id):
 		"""
@@ -90,7 +90,7 @@ class Astar(Strategy):
 		if self.max_elevation_gain:			
 			return euclidean_dist/elevation_diff/100
 		else:
-			return euclidean_dist+elevation_diff
+			return euclidean_dist
 	
 	def get_elevation(self, node_id):
 		"""
