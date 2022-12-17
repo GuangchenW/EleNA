@@ -18,7 +18,7 @@ class MapView:
         path (JSON string): readily computed path   
         """
         self.start = (start[1], start[0])
-        self.end = end
+        self.end = (end[1], end[0])
         self.m = folium.Map(location = self.start, zoom_start=17)
         folium.GeoJson(path).add_to(self.m)
         self.insert_start_image()
@@ -37,5 +37,5 @@ class MapView:
         """
         Inserts a destination icon on the end of the path
         """
-        icon = folium.Icon(color="red", icon="glyphicon-home")
-        marker = folium.Marker(location=self.start, icon=icon).add_to(self.m)
+        icon = folium.Icon(color="blue", icon="glyphicon-ok-circle")
+        marker = folium.Marker(location=self.end, icon=icon).add_to(self.m)
