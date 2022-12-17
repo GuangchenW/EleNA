@@ -1,13 +1,16 @@
 # EleNA
 Collaboration Project for CS 520
 
-### Use pipenv
+#### Use pipenv
 1. Navigate to project root directory
 2. Enter "pipenv shell" in command line to start new virtual shell session
 3. Use command "pipenv install" to install dependencies (DO NOT modify PipFile.lock directly!)
 4. Enter "exit" to exit pipenv
 
-### How to run
+#### Documentation
+1. Use the command "pydoc -w [module]" to generate documentations
+
+#### How to run
 1. Navigate to the root directory of the project
 2. While in the virtual environment, enter "python3 src/main.py" in the terminal
 3. The application should open in a browser
