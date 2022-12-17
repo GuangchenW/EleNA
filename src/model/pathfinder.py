@@ -112,9 +112,13 @@ class Pathfinder:
 		Set the pathfinding strategy for this pathfinder.
 		
 		Parameters:
-		strategy (:Strategy): The pathfinding strategy to be used.
+		strategy (str): The pathfinding strategy to be used.
 		"""
-		self.strategy = strategy
+		if (strategy == 'Astar'):
+			self.strategy = Astar(self.map, self.elevation_data)
+		else:
+			self.strategy = Dijkstra(self.map, self.elevation_data)
+			
 
 if __name__=='__main__':
 	#p = Pathfinder()
