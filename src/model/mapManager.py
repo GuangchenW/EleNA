@@ -45,7 +45,8 @@ def download_graph(place, preview=False):
 	preview (boolean): Whether to show preview of map once download completes
 	"""
 	G = ox.graph_from_place(place, simplify=False, network_type='drive')
-	ox.io.save_graphml(G)
+	download_evelation(G)
+	ox.io.save_graphml(G, filepath=os.path.join(CURRENT_DIRECTORY, './data/graph.graphml'))
 	if preview:
 		ox.plot.plot_graph(G)
 		
