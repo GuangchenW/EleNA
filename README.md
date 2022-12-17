@@ -10,6 +10,9 @@ Collaboration Project for CS 520
 #### Documentation
 1. Use the command "pydoc -w [module]" to generate documentations
 
+#### Testing
+1. Use the command "python -m unittest [testclass]" to test the software
+
 #### How to run
 1. Navigate to the root directory of the project
 2. While in the virtual environment, enter "python3 src/main.py" in the terminal
